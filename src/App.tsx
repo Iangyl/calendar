@@ -1,7 +1,18 @@
 import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
+import Day from 'pages/Day';
+import Calendar from 'pages/Calendar';
 
 function App() {
-  return <div className="App">Hello world!</div>;
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Calendar />} />
+        <Route path="/day" element={<Day />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
 export default App;
