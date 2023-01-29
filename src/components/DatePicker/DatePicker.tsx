@@ -1,5 +1,5 @@
 /* eslint-disable react/display-name */
-import React, { forwardRef, useState } from 'react';
+import React, { forwardRef, useEffect, useState } from 'react';
 import moment from 'moment';
 import DatePicker from 'react-datepicker';
 
@@ -25,6 +25,10 @@ const CustomDatePicker = ({ onChange }: { onChange?: any }) => {
 
   const decrementDate = () =>
     currentSetDate(new Date(Math.abs(Number(currentDate) - dayInMs)));
+
+  useEffect(() => {
+    onChange(currentDate);
+  }, [currentDate]);
 
   const CustomInput = forwardRef(({ onClick }: { onClick?: any }, ref: any) => (
     <button className={styles.customInput} onClick={onClick} ref={ref}>
