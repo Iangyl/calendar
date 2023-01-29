@@ -22,7 +22,7 @@ const CellDay = ({ id }: { id: number }) => {
       return Object.keys(events[date]).length;
     }
     return 0;
-  }, [events]);
+  }, [events, month]);
 
   const handleClick = () => {
     dispatch(setCurrentDate(new Date(`${year}-${month}-${id}`)));

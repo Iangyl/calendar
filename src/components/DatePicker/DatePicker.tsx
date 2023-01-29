@@ -1,5 +1,5 @@
 /* eslint-disable react/display-name */
-import React, { forwardRef, useEffect, useState } from 'react';
+import React, { forwardRef, useCallback, useEffect, useState } from 'react';
 import moment from 'moment';
 import DatePicker from 'react-datepicker';
 
@@ -11,20 +11,26 @@ import CalendarIcon from 'assets/CalendarIcon';
 
 import styles from './DatePicker.module.sass';
 import 'react-datepicker/dist/react-datepicker.css';
+import { useAppDispatch, useAppSelector } from 'redux/hooks';
+import { selectCurrentDate } from 'redux/calendar/calendarSelect';
+import { setCurrentDate } from 'redux/calendar/calendarSlice';
 
 const CustomDatePicker = ({ onChange }: { onChange?: any }) => {
-  const [currentDate, currentSetDate] = useState<Date>(new Date());
+  const dispatch = useAppDispatch();
+  const currentDate = useAppSelector(selectCurrentDate);
 
   const handleChange = (value: Date) => {
-    currentSetDate(value);
+    dispatch(setCurrentDate(value));
     onChange(value);
   };
 
-  const incrementDate = () =>
-    currentSetDate(new Date(Math.abs(Number(currentDate) + dayInMs)));
+  const incrementDate = () => {
+    dispatch(setCurrentDate(new Date(Math.abs(Number(currentDate) + dayInMs))));
+  };
 
-  const decrementDate = () =>
-    currentSetDate(new Date(Math.abs(Number(currentDate) - dayInMs)));
+  const decrementDate = () => {
+    dispatch(setCurrentDate(new Date(Math.abs(Number(currentDate) - dayInMs))));
+  };
 
   useEffect(() => {
     onChange(currentDate);
