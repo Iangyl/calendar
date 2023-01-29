@@ -1,8 +1,7 @@
 import React from 'react';
-import AddEventForm from 'components/AddEventForm/AddEventForm';
 
 const Day = () => {
-  return <AddEventForm />;
+  return <span>hello Day!</span>;
 };
 
 export default Day;
