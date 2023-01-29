@@ -32,7 +32,7 @@ export const calendarSlice = createSlice({
     setCurrentDate: (state, action: PayloadAction<Date>) => {
       state.currentDate = action.payload;
       state.currentDateDetails = {
-        day: action.payload.getDay(),
+        day: action.payload.getDate(),
         month: action.payload.getMonth() + 1,
         year: action.payload.getFullYear(),
         hours: action.payload.getHours(),

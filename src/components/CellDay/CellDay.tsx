@@ -1,15 +1,17 @@
 import React, { useMemo } from 'react';
 import moment from 'moment';
 import { useNavigate } from 'react-router-dom';
-import { useAppSelector } from 'redux/hooks';
+import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import {
   selectCurrentDateDetails,
   selectEvents,
 } from 'redux/calendar/calendarSelect';
 
 import styles from './CellDay.module.sass';
+import { setCurrentDate } from 'redux/calendar/calendarSlice';
 
 const CellDay = ({ id }: { id: number }) => {
+  const dispatch = useAppDispatch();
   const { month, year } = useAppSelector(selectCurrentDateDetails)!;
   const events = useAppSelector(selectEvents);
   const navigation = useNavigate();
@@ -22,8 +24,13 @@ const CellDay = ({ id }: { id: number }) => {
     return 0;
   }, [events]);
 
+  const handleClick = () => {
+    dispatch(setCurrentDate(new Date(`${year}-${month}-${id}`)));
+    navigation('/day');
+  };
+
   return (
-    <div className={styles.cellDay} onClick={() => navigation('/day')}>
+    <div className={styles.cellDay} onClick={handleClick}>
       <div className={styles.dayNumber}>{id}</div>
       {eventsQuantity ? (
         <div className={styles.content}>You have {eventsQuantity} events</div>
