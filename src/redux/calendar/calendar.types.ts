@@ -2,7 +2,7 @@ export interface IEvents {
   title: string;
   description?: string;
   date: Date;
-  time?: number;
+  time?: Date | null;
 }
 
 export interface CalendarState {

@@ -1,7 +1,8 @@
 import React from 'react';
+import AddEventForm from 'components/AddEventForm/AddEventForm';
 
 const Day = () => {
-  return <div>Day</div>;
+  return <AddEventForm />;
 };
 
 export default Day;
