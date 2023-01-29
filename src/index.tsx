@@ -8,6 +8,7 @@ import { store } from 'redux/store';
 import reportWebVitals from './reportWebVitals';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
+import ModalProvider from 'components/ModalProvider/ModalProvider';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -16,7 +17,9 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <LocalizationProvider dateAdapter={AdapterMoment}>
-        <App />
+        <ModalProvider>
+          <App />
+        </ModalProvider>
       </LocalizationProvider>
     </Provider>
   </React.StrictMode>

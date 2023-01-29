@@ -9,12 +9,14 @@ const PrimaryButton = ({
   options,
   className,
   style,
+  onClick,
 }: IButton) => {
   return (
     <button
       type={type}
       className={`${className} ${styles.primaryButton}`}
       style={style}
+      onClick={onClick}
     >
       {options?.preElement && options?.preElement}
       {content}

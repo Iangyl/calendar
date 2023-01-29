@@ -5,8 +5,17 @@ export interface IEvents {
   time?: Date | null;
 }
 
+export interface ICurrentDateDetails {
+  day: number;
+  month: number;
+  year: number;
+  hours?: number;
+  minutes?: number;
+}
+
 export interface CalendarState {
   currentDate: Date;
   dateNow: Date;
-  events: Record<string, Record<string, IEvents>>;
+  currentDateDetails?: ICurrentDateDetails;
+  events: Record<string, IEvents[]>;
 }

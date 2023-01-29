@@ -5,3 +5,5 @@ export const selectCurrentDate = (state: RootState) =>
   state.calendar.currentDate;
 export const selectDateNow = (state: RootState) => state.calendar.dateNow;
 export const selectEvents = (state: RootState) => state.calendar.events;
+export const selectCurrentDateDetails = (state: RootState) =>
+  state.calendar.currentDateDetails;

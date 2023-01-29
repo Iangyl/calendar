@@ -9,7 +9,7 @@ import FormControl from '@mui/material/FormControl';
 import { useAppDispatch } from 'redux/hooks';
 import { addEvent } from 'redux/calendar/calendarSlice';
 
-const AddEventForm = () => {
+const AddEventForm = ({ closeModal }: { closeModal: () => void }) => {
   const dispatch = useAppDispatch();
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -17,6 +17,7 @@ const AddEventForm = () => {
   const [time, setTime] = useState<Date | null>(null);
 
   const clearForm = () => {
+    closeModal();
     setTitle('');
     setDescription('');
     setDate(new Date());
@@ -85,7 +86,7 @@ const AddEventForm = () => {
         <Button type="submit" variant="contained">
           Save
         </Button>
-        <Button type="button" variant="outlined">
+        <Button type="button" variant="outlined" onClick={() => clearForm()}>
           Close
         </Button>
       </Box>
