@@ -8,5 +8,5 @@ export interface IEvents {
 export interface CalendarState {
   currentDate: Date;
   dateNow: Date;
-  events: Record<string, IEvents>;
+  events: Record<string, Record<string, IEvents>>;
 }

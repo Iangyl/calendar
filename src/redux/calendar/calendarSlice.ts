@@ -15,10 +15,12 @@ export const calendarSlice = createSlice({
   initialState,
   reducers: {
     addEvent: (state, action: PayloadAction<IEvents>) => {
-      state.events = {
-        ...state.events,
-        [moment(action.payload.date).format('DD-MM-Y')]: action.payload,
-      };
+      const dateOfEvent = moment(action.payload.date).format('DD-MM-Y');
+      const timeOfEvent = moment(action.payload.date).format('hh:mm');
+      if (state.events[dateOfEvent]) {
+        state.events[dateOfEvent][timeOfEvent] = action.payload;
+      }
+      state.events[dateOfEvent][timeOfEvent] = action.payload;
     },
     setCurrentDate: (state, action: PayloadAction<Date>) => {
       state.currentDate = action.payload;
