@@ -4,11 +4,12 @@ import 'styles/reset.css';
 import 'styles/global.css';
 import App from './App';
 import { Provider } from 'react-redux';
-import { store } from 'redux/store';
+import { persistor, store } from 'redux/store';
 import reportWebVitals from './reportWebVitals';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import ModalProvider from 'components/ModalProvider/ModalProvider';
+import { PersistGate } from 'redux-persist/integration/react';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -16,11 +17,13 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <LocalizationProvider dateAdapter={AdapterMoment}>
-        <ModalProvider>
-          <App />
-        </ModalProvider>
-      </LocalizationProvider>
+      <PersistGate loading={null} persistor={persistor}>
+        <LocalizationProvider dateAdapter={AdapterMoment}>
+          <ModalProvider>
+            <App />
+          </ModalProvider>
+        </LocalizationProvider>
+      </PersistGate>
     </Provider>
   </React.StrictMode>
 );

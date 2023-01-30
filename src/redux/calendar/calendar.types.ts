@@ -1,8 +1,8 @@
 export interface IEvents {
   title: string;
   description?: string;
-  date: Date;
-  time?: Date | null;
+  date: string;
+  time?: string | null;
 }
 
 export interface ICurrentDateDetails {
@@ -14,8 +14,8 @@ export interface ICurrentDateDetails {
 }
 
 export interface CalendarState {
-  currentDate: Date;
-  dateNow: Date;
+  currentDate: string;
+  dateNow: string;
   currentDateDetails?: ICurrentDateDetails;
   events: Record<string, IEvents[]>;
 }

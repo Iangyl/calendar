@@ -14,6 +14,7 @@ const Calendar = () => {
     { length: daysInMonth(month, year) },
     (_, i) => i + 1
   );
+
   return (
     <PageWrapper>
       <CalendarHeader />

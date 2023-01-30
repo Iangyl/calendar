@@ -1,9 +1,9 @@
 import { RootState } from 'redux/store';
 
-export const selectCalendar = (state: RootState) => state.calendar;
+export const selectCalendar = (state: RootState) => state;
 export const selectCurrentDate = (state: RootState) =>
-  state.calendar.currentDate;
-export const selectDateNow = (state: RootState) => state.calendar.dateNow;
-export const selectEvents = (state: RootState) => state.calendar.events;
+  new Date(state.currentDate);
+export const selectDateNow = (state: RootState) => new Date(state.dateNow);
+export const selectEvents = (state: RootState) => state.events;
 export const selectCurrentDateDetails = (state: RootState) =>
-  state.calendar.currentDateDetails;
+  state.currentDateDetails;

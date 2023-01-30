@@ -25,7 +25,7 @@ const CellDay = ({ id }: { id: number }) => {
   }, [events, month]);
 
   const handleClick = () => {
-    dispatch(setCurrentDate(new Date(`${year}-${month}-${id}`)));
+    dispatch(setCurrentDate(new Date(`${year}-${month}-${id}`).toString()));
     navigation('/day');
   };
 

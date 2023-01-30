@@ -5,8 +5,8 @@ import moment from 'moment';
 import { CalendarState, IEvents } from './calendar.types';
 
 const initialState: CalendarState = {
-  dateNow: new Date(),
-  currentDate: new Date(),
+  dateNow: new Date().toString(),
+  currentDate: new Date().toString(),
   currentDateDetails: {
     day: new Date().getDay(),
     month: new Date().getMonth(),
@@ -20,23 +20,27 @@ export const calendarSlice = createSlice({
   initialState,
   reducers: {
     addEvent: (state, action: PayloadAction<IEvents>) => {
-      const dateOfEvent = moment(action.payload.date).format('DD-MM-Y');
+      const dateOfEvent = moment(new Date(action.payload.date)).format(
+        'DD-MM-Y'
+      );
       if (state.events[dateOfEvent]) {
         state.events[dateOfEvent] = [
           ...state.events[dateOfEvent],
           action.payload,
         ];
+      } else {
+        state.events[dateOfEvent] = [action.payload];
       }
-      state.events[dateOfEvent] = [action.payload];
     },
-    setCurrentDate: (state, action: PayloadAction<Date>) => {
+    setCurrentDate: (state, action: PayloadAction<string>) => {
       state.currentDate = action.payload;
+      const newDate = new Date(action.payload);
       state.currentDateDetails = {
-        day: action.payload.getDate(),
-        month: action.payload.getMonth() + 1,
-        year: action.payload.getFullYear(),
-        hours: action.payload.getHours(),
-        minutes: action.payload.getMinutes(),
+        day: newDate.getDate(),
+        month: newDate.getMonth() + 1,
+        year: newDate.getFullYear(),
+        hours: newDate.getHours(),
+        minutes: newDate.getMinutes(),
       };
     },
   },

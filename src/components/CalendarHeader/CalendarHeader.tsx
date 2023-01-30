@@ -9,15 +9,7 @@ import styles from './CalendarHeader.module.sass';
 import { useModal } from 'components/ModalProvider/ModalProvider';
 
 const CalendarHeader = () => {
-  const dispatch = useAppDispatch();
   const { addModal } = useModal();
-
-  const handleChange = useCallback(
-    (value: Date) => {
-      dispatch(setCurrentDate(value));
-    },
-    [dispatch]
-  );
 
   const handleClick = useCallback(() => {
     addModal();
@@ -31,7 +23,7 @@ const CalendarHeader = () => {
         className={styles.primaryBtn}
         content={<PlusIcon width={32} height={32} color="white" />}
       />
-      <DatePicker onChange={handleChange} />
+      <DatePicker />
     </header>
   );
 };

@@ -6,21 +6,23 @@ import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 
 import styles from './AddEventForm.module.sass';
 import FormControl from '@mui/material/FormControl';
-import { useAppDispatch } from 'redux/hooks';
+import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { addEvent } from 'redux/calendar/calendarSlice';
+import { selectCurrentDate } from 'redux/calendar/calendarSelect';
 
 const AddEventForm = ({ closeModal }: { closeModal: () => void }) => {
   const dispatch = useAppDispatch();
+  const currentDate = useAppSelector(selectCurrentDate);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [date, setDate] = useState(new Date()); // request data from redux and init by currDate
+  const [date, setDate] = useState(currentDate);
   const [time, setTime] = useState<Date | null>(null);
 
   const clearForm = () => {
     closeModal();
     setTitle('');
     setDescription('');
-    setDate(new Date());
+    setDate(currentDate);
     setTime(null);
   };
   const handleChangeDate = (value: Date | null) => {
@@ -33,8 +35,8 @@ const AddEventForm = ({ closeModal }: { closeModal: () => void }) => {
     event.preventDefault();
     event.stopPropagation();
     const newEvent = {
-      date,
-      time,
+      date: date.toString(),
+      time: time?.toString(),
       title,
       description,
     };

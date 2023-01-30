@@ -15,26 +15,29 @@ import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { selectCurrentDate } from 'redux/calendar/calendarSelect';
 import { setCurrentDate } from 'redux/calendar/calendarSlice';
 
-const CustomDatePicker = ({ onChange }: { onChange?: any }) => {
+const CustomDatePicker = () => {
   const dispatch = useAppDispatch();
   const currentDate = useAppSelector(selectCurrentDate);
 
   const handleChange = (value: Date) => {
-    dispatch(setCurrentDate(value));
-    onChange(value);
+    dispatch(setCurrentDate(value.toString()));
   };
 
   const incrementDate = () => {
-    dispatch(setCurrentDate(new Date(Math.abs(Number(currentDate) + dayInMs))));
+    dispatch(
+      setCurrentDate(
+        new Date(Math.abs(Number(currentDate) + dayInMs)).toString()
+      )
+    );
   };
 
   const decrementDate = () => {
-    dispatch(setCurrentDate(new Date(Math.abs(Number(currentDate) - dayInMs))));
+    dispatch(
+      setCurrentDate(
+        new Date(Math.abs(Number(currentDate) - dayInMs)).toString()
+      )
+    );
   };
-
-  useEffect(() => {
-    onChange(currentDate);
-  }, [currentDate]);
 
   const CustomInput = forwardRef(({ onClick }: { onClick?: any }, ref: any) => (
     <button className={styles.customInput} onClick={onClick} ref={ref}>
